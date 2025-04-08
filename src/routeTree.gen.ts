@@ -21,6 +21,7 @@ import { Route as UsersIndexImport } from './routes/users.index'
 import { Route as PostsIndexImport } from './routes/posts.index'
 import { Route as UsersUserIdImport } from './routes/users.$userId'
 import { Route as PostsPostIdImport } from './routes/posts.$postId'
+import { Route as HomeTesteImport } from './routes/home.teste'
 import { Route as PathlessLayoutNestedLayoutImport } from './routes/_pathlessLayout/_nested-layout'
 import { Route as PostsPostIdDeepImport } from './routes/posts_.$postId.deep'
 import { Route as PathlessLayoutNestedLayoutRouteBImport } from './routes/_pathlessLayout/_nested-layout/route-b'
@@ -85,6 +86,12 @@ const PostsPostIdRoute = PostsPostIdImport.update({
   id: '/$postId',
   path: '/$postId',
   getParentRoute: () => PostsRouteRoute,
+} as any)
+
+const HomeTesteRoute = HomeTesteImport.update({
+  id: '/home/teste',
+  path: '/home/teste',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const PathlessLayoutNestedLayoutRoute = PathlessLayoutNestedLayoutImport.update(
@@ -166,6 +173,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof PathlessLayoutNestedLayoutImport
       parentRoute: typeof PathlessLayoutImport
+    }
+    '/home/teste': {
+      id: '/home/teste'
+      path: '/home/teste'
+      fullPath: '/home/teste'
+      preLoaderRoute: typeof HomeTesteImport
+      parentRoute: typeof rootRoute
     }
     '/posts/$postId': {
       id: '/posts/$postId'
@@ -286,6 +300,7 @@ export interface FileRoutesByFullPath {
   '': typeof PathlessLayoutNestedLayoutRouteWithChildren
   '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
+  '/home/teste': typeof HomeTesteRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts/': typeof PostsIndexRoute
@@ -300,6 +315,7 @@ export interface FileRoutesByTo {
   '': typeof PathlessLayoutNestedLayoutRouteWithChildren
   '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
+  '/home/teste': typeof HomeTesteRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts': typeof PostsIndexRoute
@@ -318,6 +334,7 @@ export interface FileRoutesById {
   '/deferred': typeof DeferredRoute
   '/redirect': typeof RedirectRoute
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren
+  '/home/teste': typeof HomeTesteRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts/': typeof PostsIndexRoute
@@ -336,6 +353,7 @@ export interface FileRouteTypes {
     | ''
     | '/deferred'
     | '/redirect'
+    | '/home/teste'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts/'
@@ -349,6 +367,7 @@ export interface FileRouteTypes {
     | ''
     | '/deferred'
     | '/redirect'
+    | '/home/teste'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts'
@@ -365,6 +384,7 @@ export interface FileRouteTypes {
     | '/deferred'
     | '/redirect'
     | '/_pathlessLayout/_nested-layout'
+    | '/home/teste'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts/'
@@ -382,6 +402,7 @@ export interface RootRouteChildren {
   PathlessLayoutRoute: typeof PathlessLayoutRouteWithChildren
   DeferredRoute: typeof DeferredRoute
   RedirectRoute: typeof RedirectRoute
+  HomeTesteRoute: typeof HomeTesteRoute
   PostsPostIdDeepRoute: typeof PostsPostIdDeepRoute
 }
 
@@ -392,6 +413,7 @@ const rootRouteChildren: RootRouteChildren = {
   PathlessLayoutRoute: PathlessLayoutRouteWithChildren,
   DeferredRoute: DeferredRoute,
   RedirectRoute: RedirectRoute,
+  HomeTesteRoute: HomeTesteRoute,
   PostsPostIdDeepRoute: PostsPostIdDeepRoute,
 }
 
@@ -411,6 +433,7 @@ export const routeTree = rootRoute
         "/_pathlessLayout",
         "/deferred",
         "/redirect",
+        "/home/teste",
         "/posts_/$postId/deep"
       ]
     },
@@ -450,6 +473,9 @@ export const routeTree = rootRoute
         "/_pathlessLayout/_nested-layout/route-a",
         "/_pathlessLayout/_nested-layout/route-b"
       ]
+    },
+    "/home/teste": {
+      "filePath": "home.teste.tsx"
     },
     "/posts/$postId": {
       "filePath": "posts.$postId.tsx",

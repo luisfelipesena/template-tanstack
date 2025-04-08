@@ -1,0 +1,23 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+# Rule: Prioritize TanStack Libraries
+
+**Context:** This project utilizes several libraries from the TanStack ecosystem, as indicated in `package.json`, including:
+- `@tanstack/react-query` for data fetching and state management.
+- `@tanstack/react-table` for building complex tables and datagrids.
+- `@tanstack/react-form` for managing form state and validation.
+- `@tanstack/react-pacer` for utilities like debouncing and throttling.
+
+**Instruction:**
+When implementing features related to data fetching, table/datagrid creation, form management, or asynchronous operation control (like debouncing/throttling), **you MUST prioritize using the corresponding TanStack library's functions, hooks, and patterns.**
+
+- For data fetching, use hooks like `useQuery`, `useMutation`, etc., from `@tanstack/react-query`.
+- For tables, use `useReactTable` and related utilities from `@tanstack/react-table`.
+- For forms, use `useForm`, `Field`, etc., from `@tanstack/react-form`.
+- For debouncing/throttling, use hooks like `useDebouncedCallback` from `@tanstack/react-pacer`.
+
+Avoid using alternative libraries or custom implementations for these specific tasks unless there's a compelling, explicitly stated reason. Adhere to the best practices and idiomatic usage patterns documented for each TanStack library.
